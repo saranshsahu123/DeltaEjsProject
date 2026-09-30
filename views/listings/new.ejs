@@ -1,0 +1,194 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-7 col-md-9">
+
+            <!-- Form Card -->
+            <div class="card border-0 shadow-sm rounded-4">
+
+                <div class="card-body p-4 p-md-5">
+
+                    <!-- Header -->
+                    <div class="text-center mb-4">
+
+                        <h1 class="fw-bold mb-2">
+                            Create New Listing
+                        </h1>
+
+                        <p class="text-muted mb-0">
+                            Add a beautiful destination to your Wanderlust collection.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Form -->
+                    <form method="POST" action="/Listings"  class="needs-validation" novalidate>
+
+                        <!-- Title -->
+                        <div class="mb-3">
+
+                            <label for="title" class="form-label fw-semibold">
+                                Title
+                            </label>
+
+                            <input
+                                type="text"
+                                id="title"
+                                name="Listings[title]"
+                                class="form-control"
+                                placeholder="Enter listing title"
+                                required
+                            >
+                    
+
+                        </div>
+
+
+                        <!-- Description -->
+                        <div class="mb-3">
+
+                            <label for="description" class="form-label fw-semibold">
+                                Description
+                            </label>
+
+                            <textarea
+                                id="description"
+                                name="Listings[description]"
+                                class="form-control"
+                                rows="5"
+                                placeholder="Describe your beautiful destination..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <!-- Image URL -->
+                        <div class="mb-3">
+
+                            <label for="image" class="form-label fw-semibold">
+                                Image URL
+                            </label>
+
+                            <input
+                                type="url"
+                                id="image"
+                                name="Listings[image]"
+                                class="form-control"
+                                placeholder="Enter image URL"
+                            >
+
+                        </div>
+
+
+                        <!-- Price + Location -->
+                        <div class="row">
+
+                            <!-- Price -->
+                            <div class="col-md-6 mb-3">
+
+                                <label for="price" class="form-label fw-semibold">
+                                    Price
+                                </label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-text">
+                                        ₹
+                                    </span>
+
+                                    <input
+                                        type="text"
+                                        id="price"
+                                        name="Listings[price]"
+                                        class="form-control"
+                                        placeholder="Enter price"
+                                        min="0"
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Location -->
+                            <div class="col-md-6 mb-3">
+
+                                <label for="location" class="form-label fw-semibold">
+                                    Location
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="location"
+                                    name="Listings[location]"
+                                    class="form-control"
+                                    placeholder="Enter location"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Country -->
+                        <div class="mb-4">
+
+                            <label for="country" class="form-label fw-semibold">
+                                Country
+                            </label>
+
+                            <input
+                                type="text"
+                                id="country"
+                                name="Listings[country]"
+                                class="form-control"
+                                placeholder="Enter country"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- Submit -->
+                        <div class="d-grid">
+
+                            <button
+                                type="submit"
+                                class="btn btn-danger btn-lg"
+                            >
+                                Add Listing
+                            </button>
+
+                        </div>
+
+
+                        <!-- Back -->
+                        <div class="text-center mt-3">
+
+                            <a
+                                href="/Listings"
+                                class="text-decoration-none text-secondary"
+                            >
+                                ← Back to all listings
+                            </a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
