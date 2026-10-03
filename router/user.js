@@ -16,9 +16,15 @@ router.post("/signup" , wrapAsync(async (req , res ) => {
         let {username , email , password } = req.body;
         const  newUser = new User({email , username});
       const registerdUser = await User.register(newUser , password);
-     
-      req.flash("success" , "welcome to wonderlusts");
-      res.redirect("/Listings");
+     req.login(registerdUser , (err) => {
+        if(err) {
+            return next(err);
+        }
+
+       
+        req.flash("success" , "welcome to wonderlusts");
+        res.redirect("/Listings");
+     });
     }
 catch (err) {
         req.flash("error", err.message);
@@ -42,5 +48,19 @@ router.post(
         res.redirect("/listings");
     }
 );
+
+
+
+router.get("/logout", (req, res, next) => {
+    req.logout((err) => {
+        if (err) {
+            return next(err);
+        }
+
+        req.flash("success", "You logged out successfully!");
+             res.redirect("/listings");
+    });
+});
+
 
 module.exports = router;

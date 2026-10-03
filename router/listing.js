@@ -4,6 +4,7 @@ const wrapAsync = require("../utills/wrapAsync.js");
 const { listingSchema } = require("../schema.js");
 const ExpressError = require("../utills/ExpressError.js");
 const Listing = require("../models/listing.js");
+const isLoggedIn = require("../middleware.js");
 
 
 const validateListing = (req, res, next) => {
@@ -23,16 +24,13 @@ router.get("/", wrapAsync(async (req, res) => {
     res.render("listings/index", { allListings });
 }));
 
-router.get("/new", (req, res) => {
-    if (!req.isAuthenticated()) {
-        req.flash("error" , "you must be logged in to create listing");
-        return res.redirect("/login");
-    }
+router.get("/new", isLoggedIn ,(req, res) => {
+   
     res.render("listings/new");
 });
 
 
-router.get("/:id", wrapAsync(async (req, res) => {
+router.get("/:id", isLoggedIn ,wrapAsync(async (req, res) => {
 
 
     const { id } = req.params;
@@ -63,7 +61,7 @@ router.post("/", validateListing, wrapAsync(async (req, res) => {
 
 
 
-router.put("/:id", validateListing, wrapAsync(async (req, res) => {
+router.put("/:id", isLoggedIn , validateListing, wrapAsync(async (req, res) => {
 
     if (!req.body.Listings) {
         new ExpressError(400, "Invalid listing data");
@@ -82,7 +80,7 @@ router.put("/:id", validateListing, wrapAsync(async (req, res) => {
 
 }));
 
-router.get("/:id/edit", wrapAsync(async (req, res) => {
+router.get("/:id/edit", isLoggedIn ,wrapAsync(async (req, res) => {
     const { id } = req.params;
     const listing = await Listing.findById(id);
     res.render("listings/update", { listing });
