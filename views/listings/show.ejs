@@ -31,6 +31,8 @@
                     </h4> -->
 
                     <p class="card-text text-muted">
+                        <i><%= listing.owner.username %> </i>
+                        <br>
                         <%= listing.description %>
                     </p>
 
@@ -46,7 +48,7 @@
 
                 </div>
             </div>
-
+<% if (currentUser && currentUser._id.equals(listing.owner._id)) { %>
             <!-- Action Buttons -->
             <div class="d-flex gap-2 mt-4">
 
@@ -68,7 +70,7 @@
                         Delete Listing
                     </button>
                 </form>
-
+<%}%>
                 <a 
                     href="/Listings"
                     class="btn btn-outline-secondary"
