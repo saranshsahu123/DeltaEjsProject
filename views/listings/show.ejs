@@ -83,6 +83,8 @@
         </div>
     </div>
 
+ 
+ <% if (currentUser ){%>
     <!-- Review Form -->
 <div class="col-8 offset-2 mb-4">
 
@@ -124,7 +126,7 @@
     </form>
 
 </div>
-
+<%}%>
 
 <!-- Show Reviews -->
 <div class="col-8 offset-2">
@@ -138,6 +140,10 @@
         <div class="card mb-3">
 
             <div class="card-body">
+
+                <h2>
+                    <%= review.author.username %>
+                </h2>
 
                 <h5>
                     Rating: <%= review.rating %> ★

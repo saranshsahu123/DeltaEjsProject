@@ -5,6 +5,7 @@ const Review = require("../models/review.js");
 const wrapAsync = require("../utills/wrapAsync.js");
 const ExpressError = require("../utills/ExpressError.js");
 const {  reviewSchema} = require("../schema.js");
+const { isLoggedIn } = require("../middleware.js");
 // reviews 
 // post Route 
 
@@ -19,7 +20,7 @@ const validateReview  = (req, res, next) => {
     next();
 };
 
-router.post("/" , validateReview , wrapAsync(async(req , res )=> {
+router.post("/" , isLoggedIn , validateReview , wrapAsync(async(req , res )=> {
 
     console.log("POST REVIEW ROUTE CALLED");
     console.log("Listing ID:", req.params.id);
@@ -27,7 +28,8 @@ router.post("/" , validateReview , wrapAsync(async(req , res )=> {
     
     let listing = await Listing.findById(req.params.id);
     let newReview = new Review(req.body.review);
-    
+    newReview.author = req.user._id ;
+    console.log(newReview)
     listing.reviews.push(newReview);
 
     await newReview.save();
@@ -40,7 +42,7 @@ router.post("/" , validateReview , wrapAsync(async(req , res )=> {
 //reviews 
 // Delete Route
 
-router.delete("/:reviewId", wrapAsync(async (req, res) => {
+router.delete("/:reviewId",isLoggedIn , wrapAsync(async (req, res) => {
 
     const { id, reviewId } = req.params;
     console.log(req.params);
