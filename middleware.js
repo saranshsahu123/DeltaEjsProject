@@ -1,6 +1,6 @@
 const Listing = require("./models/listing.js");
 const ExpressError = require("./utills/ExpressError.js");
-const { listingSchema } = require("./schema.js");
+const { listingSchema, reviewSchema } = require("./schema.js");
 
 
 const isLoggedIn = (req, res, next) => {
@@ -71,11 +71,21 @@ const validateListing = (req, res, next) => {
     next();
 };
 
+const validateReview  = (req, res, next) => {
 
+    const { error } = reviewSchema.validate(req.body);
+
+    if (error) {
+        throw new ExpressError(400, error.message);
+    }
+
+    next();
+};
 
 module.exports = {
     isLoggedIn,
     saveRedirectUrl,
     isOwner,
-    validateListing
+    validateListing,
+    validateReview
 };
